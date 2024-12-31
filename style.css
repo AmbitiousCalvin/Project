@@ -1,0 +1,511 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 10px;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #222222;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  width: clamp(365px, 95%, 550px);
+}
+
+.App {
+  margin: 3rem 0 2rem;
+  padding: 0 1.5rem 2rem;
+  border-radius: 12px;
+  background-color: #f5f5f5;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  color: #333;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #4caf50;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.color-red {
+  color: #f44336;
+}
+
+.title-box {
+  position: sticky;
+  background-color: #f5f5f5;
+  top: 0px;
+  z-index: 1000;
+  padding-top: 2rem;
+  border-bottom: 2px solid lightgrey;
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 1.4rem 1.5rem;
+  font-size: 1.6rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-container input:focus {
+  border-color: #4caf50;
+}
+
+.input-container button {
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #4caf50;
+  padding: 1.2rem 1.4rem;
+  margin-left: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+  background-color: #45a045;
+}
+
+.list-group {
+  padding-top: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  list-style: none;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.list-group-item {
+  border: 1px solid #999;
+  padding: 1rem 1.2rem;
+  font-size: 1.6rem;
+  background-color: #e0e0e0;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.list-group-item.checked {
+  border-color: #ddd;
+  background-color: #f8f8f8;
+  color: #8a8a8a;
+  opacity: 0.75;
+}
+
+.list-group-item.checked:hover {
+  background-color: #f8f8f8;
+}
+
+.list-group-item.checked p {
+  text-decoration: line-through;
+  color: inherit;
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  background-color: #d6d6d6;
+}
+
+.list-group-item.checked .edit-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.list-group-item p {
+  flex: 1;
+  align-self: center;
+}
+
+.btn-container {
+  display: flex;
+  gap: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.bottom-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom-container p {
+  font-size: 1.4rem;
+  color: #777;
+}
+
+.clear-btn {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem;
+  background-color: #ff5252;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-btn:hover {
+  background-color: #e04343;
+}
+
+.edit-btn,
+.delete-btn {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  background-color: #45a045;
+  transform: translateY(-2px);
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #ff5252;
+}
+
+.delete-btn:hover {
+  background-color: #e04343;
+}
+
+/* Style for the dialog */
+
+.dialog-buttons {
+  margin-top: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style for the dialog */
+
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.dialog-buttons button {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dialog-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.dialog-buttons #confirmButton {
+  background-color: #4caf50;
+}
+
+.dialog-buttons #confirmButton:hover {
+  background-color: #388e3c;
+}
+
+.dialog-buttons #cancelButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.dialog-buttons #cancelButton:hover {
+  background-color: #d32f2f;
+}
+
+dialog input {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f3f3f3;
+}
+
+dialog {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 90%;
+  max-width: 500px;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  background-color: #f5f5f5;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  color: #333;
+}
+
+dialog p {
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip::before {
+  content: attr(data-tooltip);
+  top: -34px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.tooltip::before,
+.tooltip::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: -100;
+}
+
+.tooltip::after {
+  content: "";
+  top: -1rem;
+  border: 0.6rem solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.75);
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Edit Button */
+.list-group-item .check {
+  width: 25px;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #888;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0px;
+  width: 6px;
+  height: 14px;
+  border: solid #45a045;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  z-index: 2;
+  opacity: 0.5;
+}
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
+
+.category-container {}
+
+/* Common Button Styles */
+.unfinished,
+.finished,
+.all {
+  position: relative;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.unfinished:hover,
+.finished:hover,
+.all:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.countEl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: -5px;
+  left: -8px;
+  border-radius: 100%;
+  ffont-size: 0.8rem;
+}
+
+.unfinished {
+  background-color: #007bff;
+
+  color: #fff;
+  border-color: #0056b3;
+}
+
+.unfinished:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+  border-color: #004085;
+}
+
+.finished {
+  background-color: #28a745;
+  color: #fff;
+  border-color: #1e7e34;
+}
+
+.finished .countEl {
+  color: #fff;
+  background-color: rgba(0, 255, 85, 0.6);
+  border: 1px solid rgba(0, 255, 10, 0.8);
+}
+
+.finished i {
+  color: gold;
+}
+
+.finished:hover {
+  background-color: #1e7e34;
+
+  border-color: #155d27;
+}
+
+.all {
+  background-color: #ff5252;
+  color: #fff;
+  border-color: #c41c1c;
+}
+
+.all:hover {
+  background-color: #e04343;
+  border-color: #a81212;
+}
+
+.inactive {
+  opacity: 0.5;
+  color: #444;
+  border-color: #bbb;
+  background-color: lightgrey;
+  transition: all 0.3s;
+}
+
+.inactive i {
+  color: #555;
+}
+
+.inactive:hover {
+  opacity: 1;
+  color: #333;
+  border-color: #888;
+  background-color: #ddd;
+}
