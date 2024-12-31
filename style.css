@@ -403,8 +403,6 @@ input[type="checkbox"]:checked::after {
   background: #f1f1f1;
 }
 
-.category-container {}
-
 /* Common Button Styles */
 .unfinished,
 .finished,
@@ -441,7 +439,7 @@ input[type="checkbox"]:checked::after {
   top: -5px;
   left: -8px;
   border-radius: 100%;
-  ffont-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .unfinished {
@@ -490,8 +488,6 @@ input[type="checkbox"]:checked::after {
   background-color: #e04343;
   border-color: #a81212;
 }
-
-/* https: //github.com/AmbitiousCalvin/Project.git */
 
 .inactive {
   opacity: 0.5;
